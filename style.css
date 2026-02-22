@@ -260,49 +260,62 @@ a {
     flex-wrap: wrap;
 }
 
-/* Lead Form */
+/* === Transparent Quote Form (Glass Effect) === */
 .lead-form {
-    background-color: var(--white);
-    padding: 2rem;
+    background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+    backdrop-filter: blur(10px);           /* Blur background behind */
+    -webkit-backdrop-filter: blur(10px);   /* Safari support */
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow-hover);
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .lead-form h3 {
-    color: var(--secondary);
+    color: var(--gold);                    /* Gold stands out on transparent */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     margin-bottom: 1.5rem;
     text-align: center;
 }
 
-.form-group {
-    margin-bottom: 1.2rem;
-}
-
+/* Form fields - keep slightly solid for readability */
 .form-group input,
 .form-group select,
 .form-group textarea {
-    width: 100%;
+    background: rgba(255, 255, 255, 0.9);  /* Solid white with slight transparency */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #333;
     padding: 0.8rem 1rem;
-    border: 1px solid #ddd;
     border-radius: var(--border-radius);
-    font-family: 'Lato', sans-serif;
     font-size: 1rem;
     transition: var(--transition);
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 120px;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    outline: none;
+    background: #fff;                       /* Fully white on focus */
     border-color: var(--primary);
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
 }
 
+/* Submit button - keep prominent */
+.btn-block {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: none;                  /* Ensure button stands out */
+}
+
+.btn-block:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
 /* ===== BUTTONS ===== */
 .btn {
     display: inline-block;
