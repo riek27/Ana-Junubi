@@ -3,289 +3,2685 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advent Roofing | Premium Roofing Solutions</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Ana Junubi General Construction Company | Luxury Interior Designs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ========== CSS VARIABLES ========== */
+        :root {
+            --primary: #0a1f3f;
+            --primary-dark: #06152a;
+            --primary-light: #132d5e;
+            --gold: #c9a84c;
+            --gold-light: #e0c572;
+            --gold-dark: #a8882e;
+            --white: #ffffff;
+            --off-white: #f8f6f1;
+            --gray-light: #e8e6e1;
+            --gray: #9a9a9a;
+            --dark: #1a1a1a;
+            --text: #333333;
+            --shadow: 0 10px 40px rgba(0,0,0,0.12);
+            --shadow-lg: 0 25px 60px rgba(0,0,0,0.2);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ========== RESET & BASE ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background: var(--white);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== PRELOADER ========== */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-inner {
+            text-align: center;
+        }
+
+        .preloader-inner h2 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            animation: pulse 1.5s ease infinite;
+        }
+
+        .preloader-bar {
+            width: 200px;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            margin: 20px auto 0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .preloader-bar::after {
+            content: '';
+            display: block;
+            width: 40%;
+            height: 100%;
+            background: var(--gold);
+            border-radius: 10px;
+            animation: loading 1.2s ease infinite;
+        }
+
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(350%); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ========== TOP BAR ========== */
+        .top-bar {
+            background: var(--primary-dark);
+            padding: 10px 0;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .top-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .top-bar-left a {
+            color: rgba(255,255,255,0.7);
+            transition: var(--transition);
+        }
+
+        .top-bar-left a:hover {
+            color: var(--gold);
+        }
+
+        .top-bar-left i {
+            color: var(--gold);
+            margin-right: 8px;
+        }
+
+        .top-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .top-bar-right a {
+            color: rgba(255,255,255,0.7);
+            transition: var(--transition);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .top-bar-right a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            border-color: var(--gold);
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 9999;
+            transition: var(--transition);
+            padding: 0;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 31, 63, 0.97);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+        }
+
+        .navbar.scrolled .top-bar {
+            display: none;
+        }
+
+        .nav-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--primary);
+            font-weight: 800;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .logo-text h1 {
+            font-size: 1.1rem;
+            color: var(--white);
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            font-size: 0.7rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            list-style: none;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links > li > a {
+            color: rgba(255,255,255,0.85);
+            padding: 12px 20px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-radius: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links > li > a:hover,
+        .nav-links > li > a.active {
+            color: var(--gold);
+            background: rgba(255,255,255,0.05);
+        }
+
+        .nav-links > li > a .arrow {
+            font-size: 0.65rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(15px);
+            background: var(--white);
+            min-width: 320px;
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            pointer-events: none;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .dropdown::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--white);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+
+        .nav-links > li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: all;
+        }
+
+        .nav-links > li:hover > a .arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            transition: var(--transition);
+            color: var(--text);
+        }
+
+        .dropdown-item:hover {
+            background: var(--off-white);
+            color: var(--primary);
+        }
+
+        .dropdown-item i {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        .dropdown-item-text h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .dropdown-item-text p {
+            font-size: 0.75rem;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        .nav-contact {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-phone {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        .nav-phone i {
+            color: var(--gold);
+        }
+
+        .btn-quote {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--primary) !important;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-quote:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.4);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 100;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 2.5px;
+            background: var(--white);
+            border-radius: 10px;
+            transition: var(--transition);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(6, 21, 42, 0.92) 0%, rgba(10, 31, 63, 0.75) 50%, rgba(19, 45, 94, 0.6) 100%);
+            z-index: -1;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float-particle 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { top: 60%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { top: 40%; left: 30%; animation-delay: 4s; }
+        .particle:nth-child(4) { top: 80%; left: 60%; animation-delay: 1s; }
+        .particle:nth-child(5) { top: 10%; left: 70%; animation-delay: 3s; }
+        .particle:nth-child(6) { top: 50%; left: 50%; animation-delay: 5s; }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-30px) scale(1.5); opacity: 0.6; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(201, 168, 76, 0.15);
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            padding: 10px 24px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge i {
+            color: var(--gold);
+        }
+
+        .hero-badge span {
+            color: var(--gold-light);
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h2 {
+            font-size: 4.2rem;
+            color: var(--white);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero h2 .highlight {
+            color: var(--gold);
+            position: relative;
+        }
+
+        .hero h2 .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(201, 168, 76, 0.2);
+            border-radius: 10px;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.75);
+            margin-bottom: 40px;
+            line-height: 1.8;
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--primary) !important;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--white) !important;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: var(--transition);
+            border: 2px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            animation: bounce 2s ease infinite;
+        }
+
+        .hero-scroll a {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hero-scroll i {
+            font-size: 1.2rem;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* ========== STATS BAR ========== */
+        .stats-bar {
+            background: var(--white);
+            padding: 0;
+            position: relative;
+            z-index: 10;
+            margin-top: -60px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .stat-item {
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .stat-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 25%;
+            height: 50%;
+            width: 1px;
+            background: var(--gray-light);
+        }
+
+        .stat-item:hover {
+            background: var(--off-white);
+        }
+
+        .stat-item i {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* ========== SECTION STYLES ========== */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gold);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 30px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-images {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .about-img {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .about-img img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-img.large {
+            grid-row: span 2;
+        }
+
+        .about-img.large img {
+            height: 100%;
+            min-height: 520px;
+        }
+
+        .about-experience {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--primary);
+            padding: 25px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(201, 168, 76, 0.3);
+            z-index: 5;
+        }
+
+        .about-experience h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .about-experience p {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .about-content .section-label {
+            justify-content: flex-start;
+        }
+
+        .about-content .section-label::before {
+            display: none;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-content > p {
+            color: var(--text);
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            background: var(--off-white);
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+        .about-feature:hover {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .about-feature i {
+            color: var(--gold);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .about-feature:hover i {
+            color: var(--primary);
+        }
+
+        .about-feature span {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .about-certs {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .cert-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cert-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: var(--gold);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .cert-text h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .cert-text p {
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        /* ========== SERVICES SECTION ========== */
+        .services {
+            background: var(--off-white);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+
+        .service-icon i {
+            font-size: 1.6rem;
+            color: var(--gold);
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .service-card:hover .service-icon i {
+            color: var(--primary);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .service-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold-dark);
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            padding: 10px 0;
+        }
+
+        .service-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .service-btn:hover {
+            color: var(--primary);
+        }
+
+        .service-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ========== WHY CHOOSE US ========== */
+        .why-us {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-us::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .why-us .section-label {
+            color: var(--gold-light);
+        }
+
+        .why-us .section-label::before,
+        .why-us .section-label::after {
+            background: var(--gold-light);
+        }
+
+        .why-us .section-header h2 {
+            color: var(--white);
+        }
+
+        .why-us .section-header p {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .why-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .why-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-8px);
+            border-color: rgba(201, 168, 76, 0.3);
+        }
+
+        .why-item-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.4rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .why-item:hover .why-item-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .why-item h3 {
+            color: var(--white);
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .why-item p {
+            color: rgba(255,255,255,0.55);
+            font-size: 0.9rem;
+        }
+
+        /* ========== PROJECTS SECTION ========== */
+        .projects {
+            background: var(--white);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 350px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .project-card:first-child {
+            grid-column: span 2;
+            height: 400px;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 25px 25px;
+            background: linear-gradient(to top, rgba(6, 21, 42, 0.95) 0%, transparent 100%);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .project-overlay span {
+            color: var(--gold);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .project-overlay h3 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        /* ========== COMMITMENT SECTION ========== */
+        .commitment {
+            background: var(--off-white);
+            padding: 80px 0;
+        }
+
+        .commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .commitment-item {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .commitment-item i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .commitment-item h3 {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .commitment-item p {
+            font-size: 0.88rem;
+            color: var(--gray);
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact {
+            background: var(--white);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            padding-right: 30px;
+        }
+
+        .contact-info .section-label {
+            justify-content: flex-start;
+        }
+
+        .contact-info .section-label::before {
+            display: none;
+        }
+
+        .contact-info h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .contact-info > p {
+            color: var(--gray);
+            margin-bottom: 35px;
+            font-size: 1.05rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+
+        .contact-detail-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-detail-icon i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .contact-detail-text h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-detail-text p {
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        .contact-detail-text a {
+            color: var(--gold-dark);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .contact-detail-text a:hover {
+            color: var(--primary);
+        }
+
+        .contact-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .contact-social a {
+            width: 45px;
+            height: 45px;
+            background: var(--off-white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .contact-social a:hover {
+            background: var(--gold);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-form-wrapper {
+            background: var(--off-white);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+        }
+
+        .contact-form-wrapper h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 14px 18px;
+            border: 2px solid var(--gray-light);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--white);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            margin-top: 10px;
+        }
+
+        .form-submit .btn-primary {
+            width: 100%;
+            justify-content: center;
+            padding: 16px;
+            font-size: 1rem;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--primary-dark);
+            color: rgba(255,255,255,0.7);
+            padding: 80px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+            gap: 40px;
+            padding-bottom: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-about .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-about p {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .footer-links a:hover::before {
+            opacity: 1;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .footer-contact-item i {
+            color: var(--gold);
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .footer-contact-item p {
+            font-size: 0.95rem;
+        }
+
+        .footer-contact-item a {
+            color: var(--gold-light);
+            transition: var(--transition);
+        }
+
+        .footer-contact-item a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            padding: 25px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-bottom p {
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.5);
+            transition: var(--transition);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--gold);
+        }
+
+        /* ========== WHATSAPP FLOAT ========== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.6rem;
+            box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            animation: whatsapp-pulse 2s ease infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        @keyframes whatsapp-pulse {
+            0%, 100% { box-shadow: 0 5px 25px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 5px 25px rgba(37, 211, 102, 0.7), 0 0 0 15px rgba(37, 211, 102, 0.1); }
+        }
+
+        /* ========== BACK TO TOP ========== */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 35px;
+            z-index: 999;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            color: var(--gold);
+            border: none;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--gold);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .hero h2 {
+                font-size: 3rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .project-card:first-child {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                display: none;
+            }
+
+            .nav-main {
+                padding: 12px 20px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: var(--primary-dark);
+                flex-direction: column;
+                padding: 100px 30px 30px;
+                gap: 0;
+                transition: right 0.4s ease;
+                overflow-y: auto;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links > li > a {
+                padding: 15px 10px;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .dropdown {
+                position: static;
+                transform: none;
+                background: rgba(255,255,255,0.05);
+                box-shadow: none;
+                border: none;
+                border-radius: 12px;
+                padding: 10px;
+                display: none;
+            }
+
+            .dropdown::before {
+                display: none;
+            }
+
+            .dropdown.active {
+                display: block;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+            }
+
+            .dropdown-item {
+                color: rgba(255,255,255,0.8);
+            }
+
+            .dropdown-item:hover {
+                background: rgba(255,255,255,0.05);
+                color: var(--gold);
+            }
+
+            .dropdown-item i {
+                background: rgba(201, 168, 76, 0.2);
+            }
+
+            .nav-contact {
+                display: none;
+            }
+
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-item:nth-child(2)::after {
+                display: none;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .about-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .about-certs {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-card:first-child {
+                grid-column: span 1;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: span 1;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form-wrapper {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .stat-item h3 {
+                font-size: 1.8rem;
+            }
+
+            .about-images {
+                grid-template-columns: 1fr;
+            }
+
+            .about-img.large img {
+                min-height: 300px;
+            }
+
+            .about-img img {
+                height: 200px;
+            }
+        }
+
+        /* ========== ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile overlay */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 98;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header -->
-    <header id="main-header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="logo-text">Advent <span>Roofing</span></div>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <h2>ANA JUNUBI</h2>
+            <div class="preloader-bar"></div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/211980822822" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-bar-left">
+                    <a href="tel:+211980822822"><i class="fas fa-phone-alt"></i> +211 980 822 822</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> Juba, South Sudan</a>
+                    <a href="#"><i class="fas fa-clock"></i> Open Now</a>
                 </div>
-                
-                <button class="mobile-menu-btn" id="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <nav class="nav-links" id="main-nav">
-                    <a href="index.html" class="nav-link active">Home</a>
-                    <a href="about.html" class="nav-link">About</a>
-                    <div class="dropdown" id="services-dropdown">
-                        <a href="services.html" class="nav-link dropdown-toggle">
-                            Services <i class="fas fa-chevron-down dropdown-arrow"></i>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="services.html#installation" class="dropdown-item">Roof Installation</a>
-                            <a href="services.html#repair" class="dropdown-item">Roof Repair</a>
-                            <a href="services.html#inspection" class="dropdown-item">Roof Inspection</a>
-                            <a href="services.html#gutter" class="dropdown-item">Gutter Systems</a>
-                            <a href="services.html#emergency" class="dropdown-item">Emergency Services</a>
-                        </div>
-                    </div>
-                    <a href="gallery.html" class="nav-link">Gallery</a>
-                    <a href="testimonials.html" class="nav-link">Testimonials</a>
-                    <a href="contact.html" class="nav-link">Contact</a>
-                </nav>
+                <div class="top-bar-right">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://wa.me/211980822822" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
             </div>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text animate-on-scroll">
-                    <h1>Premium Roofing Solutions for Your Home</h1>
-                    <div class="typing-text">
-                        We protect your home with: <span id="typing"></span>
-                    </div>
-                    <p style="color: #007bff;">
-                         With over 20 years of experience, Advent Roofing provides reliable, high-quality roofing services with a commitment to excellence and customer satisfaction.
-                    </p>
+        <!-- Main Nav -->
+        <div class="nav-main">
+            <a href="#home" class="logo">
+                <div class="logo-icon">AJ</div>
+                <div class="logo-text">
+                    <h1>Ana Junubi</h1>
+                    <span>General Construction</span>
+                </div>
+            </a>
 
-                    <div class="hero-buttons">
-                        <a href="contact.html" class="btn btn-cta-outline">Get Free Estimate</a>
-                        <a href="tel:5551237663" class="btn btn-secondary">
-                            <i class="fas fa-phone"></i> (555) 123-ROOF
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li>
+                    <a href="#services">Services <i class="fas fa-chevron-down arrow"></i></a>
+                    <div class="dropdown" id="dropdown">
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-couch"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Luxury Interior Design</h4>
+                                <p>Premium space planning & design</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-paint-roller"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Interior & Exterior Painting</h4>
+                                <p>Professional finishing & coatings</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-home"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Residential Construction</h4>
+                                <p>Custom homes & villas</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-building"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Commercial Projects</h4>
+                                <p>Offices, retail & more</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-tools"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Renovation & Remodeling</h4>
+                                <p>Transform your existing space</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-hard-hat"></i>
+                            <div class="dropdown-item-text">
+                                <h4>General Construction</h4>
+                                <p>Complete building solutions</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-border-all"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Ceiling & Decorative Finishing</h4>
+                                <p>Elegant ceiling designs</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-fill-drip"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Wall Design & Finishing</h4>
+                                <p>Modern wall surfaces</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-th-large"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Flooring Installation</h4>
+                                <p>Premium flooring solutions</p>
+                            </div>
+                        </a>
+                        <a href="#services" class="dropdown-item">
+                            <i class="fas fa-magic"></i>
+                            <div class="dropdown-item-text">
+                                <h4>Modern Space Transformation</h4>
+                                <p>Complete space makeovers</p>
+                            </div>
                         </a>
                     </div>
+                </li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-contact">
+                <a href="tel:+211980822822" class="nav-phone">
+                    <i class="fas fa-phone-alt"></i>
+                    +211 980 822 822
+                </a>
+                <a href="#contact" class="btn-quote">Get Quote</a>
+            </div>
+
+            <div class="menu-toggle" id="menuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80" alt="Luxury Interior Design">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    <span>Premium Construction & Design</span>
                 </div>
-                
-                <div class="lead-form animate-on-scroll" style="animation-delay: 0.3s;">
-                    <h3>Get Your Free Roofing Quote</h3>
-                    <form id="lead-form">
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
+                <h2>Building <span class="highlight">Luxury</span> Spaces That Define Your Lifestyle</h2>
+                <p>We transform visions into stunning realities with premium construction, luxury interior designs, and professional painting services across South Sudan.</p>
+                <div class="hero-buttons">
+                    <a href="tel:+211980822822" class="btn-primary">
+                        <i class="fas fa-phone-alt"></i> Call Us Now
+                    </a>
+                    <a href="#contact" class="btn-secondary">
+                        <i class="fas fa-file-alt"></i> Get Free Quote
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#about">
+                <span>Scroll Down</span>
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item reveal">
+                    <i class="fas fa-hard-hat"></i>
+                    <h3>150+</h3>
+                    <p>Projects Completed</p>
+                </div>
+                <div class="stat-item reveal">
+                    <i class="fas fa-users"></i>
+                    <h3>120+</h3>
+                    <p>Happy Clients</p>
+                </div>
+                <div class="stat-item reveal">
+                    <i class="fas fa-trophy"></i>
+                    <h3>10+</h3>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-item reveal">
+                    <i class="fas fa-star"></i>
+                    <h3>100%</h3>
+                    <p>Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-images reveal">
+                    <div class="about-img large">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80" alt="Construction Team">
+                    </div>
+                    <div class="about-img">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Interior Design">
+                    </div>
+                    <div class="about-img">
+                        <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80" alt="Luxury Painting">
+                    </div>
+                    <div class="about-experience">
+                        <h3>10+</h3>
+                        <p>Years of<br>Excellence</p>
+                    </div>
+                </div>
+                <div class="about-content reveal">
+                    <div class="section-label">
+                        <span>About Our Company</span>
+                        <span></span>
+                    </div>
+                    <h2>We Build Spaces That Inspire & Elevate Living</h2>
+                    <p>Ana Junubi General Construction Company is a trusted construction and interior design company based in Juba, South Sudan, specializing in high-quality building solutions, luxury interior designs, and professional painting services.</p>
+                    <p>We are committed to delivering elegant, modern, and functional spaces that reflect our clients' vision and lifestyle. From residential homes to commercial properties, we provide construction and finishing services that combine beauty, durability, and excellence.</p>
+
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Licensed & Certified</span>
                         </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="Phone Number" required>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Expert Team</span>
                         </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email Address" required>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Premium Materials</span>
                         </div>
-                        <div class="form-group">
-                            <select required>
-                                <option value="" disabled selected>Select Service</option>
-                                <option value="installation">Roof Installation</option>
-                                <option value="repair">Roof Repair</option>
-                                <option value="inspection">Roof Inspection</option>
-                                <option value="gutter">Gutter Systems</option>
-                                <option value="emergency">Emergency Services</option>
-                            </select>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>On-Time Delivery</span>
                         </div>
-                        <button type="submit" class="btn btn-block">Send Request</button>
-                    </form>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Modern Techniques</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>24/7 Support</span>
+                        </div>
+                    </div>
+
+                    <div class="about-certs">
+                        <div class="cert-item">
+                            <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                            <div class="cert-text">
+                                <h4>Fully Licensed</h4>
+                                <p>Government Registered</p>
+                            </div>
+                        </div>
+                        <div class="cert-item">
+                            <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="cert-text">
+                                <h4>Insured</h4>
+                                <p>Full Project Coverage</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Featured Services -->
-    <section class="section-padding">
+
+    <!-- Services Section -->
+    <section class="section services" id="services">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Our Premium Services</h2>
+            <div class="section-header reveal">
+                <div class="section-label">
+                    <span>What We Offer</span>
+                </div>
+                <h2>Our Professional Services</h2>
+                <p>We provide a wide range of professional construction and design services tailored to your unique needs</p>
+            </div>
             <div class="services-grid">
-                <div class="service-card animate-on-scroll">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Roof Installation">
-                    </div>
-                    <div class="service-content">
-                        <h3>Roof Installation</h3>
-                        <p>Professional installation of durable roofing materials with industry-leading warranties for maximum protection.</p>
-                        <a href="services.html#installation" class="btn btn-outline">Learn More</a>
-                    </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-couch"></i></div>
+                    <h3>Luxury Interior Design</h3>
+                    <p>Transform your spaces with bespoke interior designs that blend elegance, functionality, and modern aesthetics. We create environments that truly reflect your personality and style.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
-                <div class="service-card animate-on-scroll" style="animation-delay: 0.2s;">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1673&q=80" alt="Roof Repair">
-                    </div>
-                    <div class="service-content">
-                        <h3>Roof Repair</h3>
-                        <p>Prompt and reliable repair services to fix leaks, damages, and extend the life of your roof.</p>
-                        <a href="services.html#repair" class="btn btn-outline">Learn More</a>
-                    </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
+                    <h3>Interior & Exterior Painting</h3>
+                    <p>Professional painting services using premium quality paints and finishes. We deliver flawless results that enhance the beauty and value of your property.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
                 </div>
-                
-                <div class="service-card animate-on-scroll" style="animation-delay: 0.4s;">
-                    <div class="service-img">
-                        <img src="https://images.unsplash.com/photo-1513584684374-8bab748fbf90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2068&q=80" alt="Roof Inspection">
-                    </div>
-                    <div class="service-content">
-                        <h3>Roof Inspection</h3>
-                        <p>Comprehensive roof assessment to identify issues early and provide maintenance recommendations.</p>
-                        <a href="services.html#inspection" class="btn btn-outline">Learn More</a>
-                    </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-home"></i></div>
+                    <h3>Residential Construction</h3>
+                    <p>From concept to completion, we build beautiful homes that combine modern architecture with quality craftsmanship. Your dream home is our priority.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-building"></i></div>
+                    <h3>Commercial Building Projects</h3>
+                    <p>Expert commercial construction services for offices, retail spaces, and business facilities. We deliver projects on time and within budget.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-tools"></i></div>
+                    <h3>Renovation & Remodeling</h3>
+                    <p>Breathe new life into your existing spaces with our comprehensive renovation services. We upgrade, modernize, and transform your property.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
+                    <h3>General Construction Services</h3>
+                    <p>Complete building solutions from foundation to finishing. Our experienced teams handle every aspect of your construction project with precision.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-border-all"></i></div>
+                    <h3>Ceiling & Decorative Finishing</h3>
+                    <p>Stunning ceiling designs and decorative finishes that add character and elegance to any room. We create visual masterpieces above you.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-fill-drip"></i></div>
+                    <h3>Wall Design & Surface Finishing</h3>
+                    <p>Modern wall treatments and surface finishing techniques that transform plain walls into stunning features. Texture, patterns, and premium finishes.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card reveal">
+                    <div class="service-icon"><i class="fas fa-th-large"></i></div>
+                    <h3>Flooring Installation</h3>
+                    <p>Premium flooring solutions including tiles, marble, hardwood, and more. We install floors that are beautiful, durable, and built to last.</p>
+                    <a href="#contact" class="service-btn">Get Free Quote <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Why Choose Us -->
-    <section class="section-padding why-choose-us">
+    <section class="section why-us" id="why-us">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">Why Choose Advent Roofing</h2>
-            <div class="features-grid">
-                <div class="feature-item animate-on-scroll">
-                    <div class="feature-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h3>Certified Experts</h3>
-                    <p>Our team consists of factory-trained, certified roofing professionals with extensive experience.</p>
+            <div class="section-header reveal">
+                <div class="section-label">
+                    <span>Our Advantages</span>
                 </div>
-                <div class="feature-item animate-on-scroll" style="animation-delay: 0.1s;">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Lifetime Warranty</h3>
-                    <p>We offer comprehensive warranties on both materials and workmanship for your peace of mind.</p>
+                <h2>Why Choose Ana Junubi</h2>
+                <p>Clients trust us because we deliver excellence in every project</p>
+            </div>
+            <div class="why-us-grid">
+                <div class="why-item reveal">
+                    <div class="why-item-icon"><i class="fas fa-users-cog"></i></div>
+                    <h3>Professional Teams</h3>
+                    <p>Experienced and skilled construction professionals dedicated to quality</p>
                 </div>
-                <div class="feature-item animate-on-scroll" style="animation-delay: 0.2s;">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <h3>24/7 Emergency Service</h3>
-                    <p>Round-the-clock emergency response for storm damage, leaks, and urgent roofing issues.</p>
+                <div class="why-item reveal">
+                    <div class="why-item-icon"><i class="fas fa-gem"></i></div>
+                    <h3>Luxury Finishing</h3>
+                    <p>Sophisticated interior finishing with premium materials and attention to detail</p>
                 </div>
-                <div class="feature-item animate-on-scroll" style="animation-delay: 0.3s;">
-                    <div class="feature-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <h3>Transparent Pricing</h3>
-                    <p>No hidden costs. We provide detailed quotes and stick to our agreed-upon pricing.</p>
+                <div class="why-item reveal">
+                    <div class="why-item-icon"><i class="fas fa-paint-brush"></i></div>
+                    <h3>Quality Painting</h3>
+                    <p>High-quality painting solutions with flawless finishes every time</p>
+                </div>
+                <div class="why-item reveal">
+                    <div class="why-item-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h3>Reliable Execution</h3>
+                    <p>On-time project delivery with transparent communication throughout</p>
+                </div>
+                <div class="why-item reveal">
+                    <div class="why-item-icon"><i class="fas fa-search"></i></div>
+                    <h3>Attention to Detail</h3>
+                    <p>Premium workmanship with meticulous care for every finishing touch</p>
+                </div>
+                <div class="why-item reveal">
+                    <div class="why-item-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Modern Techniques</h3>
+                    <p>Latest construction methods and technology for superior results</p>
+                </div>
+                <div class="why-item reveal">
+                    <div class="why-item-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3>Affordable Pricing</h3>
+                    <p>Customer-focused services with competitive and transparent pricing</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Preview -->
-    <section class="section-padding testimonials-preview">
+    <!-- Projects Section -->
+    <section class="section projects" id="projects">
         <div class="container">
-            <h2 class="section-title animate-on-scroll">What Our Clients Say</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card animate-on-scroll">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>"Advent Roofing replaced our entire roof after a severe storm. They were professional, efficient, and the quality of work was exceptional. Our new roof looks amazing!"</p>
-                    <div class="client-info">
-                        <div class="client-avatar">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Thompson">
-                        </div>
-                        <div>
-                            <h4>Michael Thompson</h4>
-                            <p>Homeowner</p>
-                        </div>
-                    </div>
+            <div class="section-header reveal">
+                <div class="section-label">
+                    <span>Our Portfolio</span>
                 </div>
-                
-                <div class="testimonial-card animate-on-scroll" style="animation-delay: 0.2s;">
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p>"The team at Advent Roofing was fantastic from start to finish. They provided a detailed quote, explained the process clearly, and completed the job ahead of schedule!"</p>
-                    <div class="client-info">
-                        <div class="client-avatar">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson">
-                        </div>
-                        <div>
-                            <h4>Sarah Johnson</h4>
-                            <p>Business Owner</p>
-                        </div>
-                    </div>
-                </div>
+                <h2>Recent Projects</h2>
+                <p>Explore our latest completed projects showcasing quality and luxury</p>
             </div>
-            <div class="text-center animate-on-scroll" style="animation-delay: 0.4s;">
-                <a href="testimonials.html" class="btn btn-outline">See All Testimonials</a>
+            <div class="projects-grid">
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80" alt="Luxury Villa Interior">
+                    <div class="project-overlay">
+                        <span>Residential</span>
+                        <h3>Luxury Villa Interior Design</h3>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80" alt="Modern Kitchen">
+                    <div class="project-overlay">
+                        <span>Interior Design</span>
+                        <h3>Modern Kitchen Renovation</h3>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <img src="assets/anajubi.jpg" alt="Office Space">
+                    <div class="project-overlay">
+                        <span>Commercial</span>
+                        <h3>Corporate Office Finishing</h3>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80" alt="Bathroom Design">
+                    <div class="project-overlay">
+                        <span>Renovation</span>
+                        <h3>Premium Bathroom Remodel</h3>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80" alt="Living Room">
+                    <div class="project-overlay">
+                        <span>Interior</span>
+                        <h3>Elegant Living Room Design</h3>
+                    </div>
+                </div>
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1600585154363-67eb9e2e2099?w=800&q=80" alt="Building Exterior">
+                    <div class="project-overlay">
+                        <span>Construction</span>
+                        <h3>Modern Residential Building</h3>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="cta-section">
+    <!-- Commitment Section -->
+    <section class="section commitment">
         <div class="container">
-            <div class="cta-content animate-on-scroll">
-                <h2>Ready to Protect Your Home?</h2>
-                <p>Get a free, no-obligation quote for your roofing project today.</p>
-                <div class="cta-buttons">
-                    <a href="contact.html" class="btn">Get Free Quote</a>
-                    <a href="tel:5551237663" class="btn btn-secondary">
-                        <i class="fas fa-phone"></i> Call Now: (555) 123-ROOF
-                    </a>
+            <div class="section-header reveal">
+                <div class="section-label">
+                    <span>Our Promise</span>
+                </div>
+                <h2>Our Commitment</h2>
+                <p>Great construction goes beyond buildings—it creates comfort, beauty, and value</p>
+            </div>
+            <div class="commitment-grid">
+                <div class="commitment-item reveal">
+                    <i class="fas fa-medal"></i>
+                    <h3>Excellence</h3>
+                    <p>Delivering excellence in every project</p>
+                </div>
+                <div class="commitment-item reveal">
+                    <i class="fas fa-palette"></i>
+                    <h3>Beautiful Spaces</h3>
+                    <p>Creating beautiful & functional environments</p>
+                </div>
+                <div class="commitment-item reveal">
+                    <i class="fas fa-award"></i>
+                    <h3>High Standards</h3>
+                    <p>Maintaining premium construction standards</p>
+                </div>
+                <div class="commitment-item reveal">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Trust & Satisfaction</h3>
+                    <p>Ensuring complete client satisfaction</p>
+                </div>
+                <div class="commitment-item reveal">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Lasting Solutions</h3>
+                    <p>Providing reliable & durable results</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <div class="section-label">
+                        <span>Contact Us</span>
+                    </div>
+                    <h2>Let's Build Your Dream Together</h2>
+                    <p>Whether you are planning a new construction project, luxury interior finishing, or professional painting services, Ana Junubi General Construction Company is ready to deliver excellence.</p>
+
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>Our Location</h4>
+                                <p>Juba, South Sudan</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>Phone / WhatsApp</h4>
+                                <p><a href="tel:+211980822822">+211 980 822 822</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>Email Address</h4>
+                                <p><a href="mailto:info@anajunubi.com">info@anajunubi.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <div class="contact-detail-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-detail-text">
+                                <h4>Working Hours</h4>
+                                <p>Monday - Saturday: 8:00 AM - 6:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/211980822822" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper reveal">
+                    <h3>Get a Free Quote</h3>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+211 XXX XXX XXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email" placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service Needed *</label>
+                                <select id="service" name="service" required>
+                                    <option value="">Select a service</option>
+                                    <option value="interior-design">Luxury Interior Design</option>
+                                    <option value="painting">Interior & Exterior Painting</option>
+                                    <option value="residential">Residential Construction</option>
+                                    <option value="commercial">Commercial Building Projects</option>
+                                    <option value="renovation">Renovation & Remodeling</option>
+                                    <option value="general">General Construction Services</option>
+                                    <option value="ceiling">Ceiling & Decorative Finishing</option>
+                                    <option value="wall">Wall Design & Surface Finishing</option>
+                                    <option value="flooring">Flooring Installation</option>
+                                    <option value="transformation">Modern Space Transformation</option>
+                                </select>
+                            </div>
+                            <div class="form-group full">
+                                <label for="message">Project Details</label>
+                                <textarea id="message" name="message" placeholder="Tell us about your project..."></textarea>
+                            </div>
+                            <div class="form-group full form-submit">
+                                <button type="submit" class="btn-primary">
+                                    <i class="fas fa-paper-plane"></i> Submit Quote Request
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <div class="footer-content">
+            <div class="footer-grid">
                 <div class="footer-about">
-                    <div class="footer-logo">Advent <span>Roofing</span></div>
-                    <p>Premium roofing solutions with over 20 years of experience. We protect your home with quality craftsmanship and reliable service.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#home" class="logo">
+                        <div class="logo-icon">AJ</div>
+                        <div class="logo-text">
+                            <h1>Ana Junubi</h1>
+                            <span>General Construction</span>
+                        </div>
+                    </a>
+                    <p>A trusted construction and interior design company based in Juba, South Sudan. We specialize in high-quality building solutions, luxury interior designs, and professional painting services.</p>
+                    <div class="contact-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/211980822822" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                
-                <div class="footer-links">
+                <div>
                     <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="services.html">Our Services</a></li>
-                        <li><a href="gallery.html">Project Gallery</a></li>
-                        <li><a href="testimonials.html">Testimonials</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-contact">
+                <div>
+                    <h4>Our Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">Interior Design</a></li>
+                        <li><a href="#services">Painting Services</a></li>
+                        <li><a href="#services">Residential Construction</a></li>
+                        <li><a href="#services">Commercial Projects</a></li>
+                        <li><a href="#services">Renovation & Remodeling</a></li>
+                        <li><a href="#services">General Construction</a></li>
+                    </ul>
+                </div>
+                <div>
                     <h4>Contact Info</h4>
-                    <p><i class="fas fa-map-marker-alt"></i> 123 Roofing Street, NY 10001</p>
-                    <p><i class="fas fa-phone"></i> (555) 123-ROOF</p>
-                    <p><i class="fas fa-envelope"></i> info@adventroofing.com</p>
-                    <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 6:00 PM</p>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p>Juba, South Sudan</p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <p><a href="tel:+211980822822">+211 980 822 822</a></p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <p><a href="https://wa.me/211980822822">+211 980 822 822</a></p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <p><a href="mailto:info@anajunubi.com">info@anajunubi.com</a></p>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-clock"></i>
+                        <p>Open Now<br>Mon - Sat: 8AM - 6PM</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="copyright">
-                <p>&copy; 2025 Advent Roofing. All rights reserved. | Designed with <i class="fas fa-heart"></i> for premium roofing solutions</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Ana Junubi General Construction Company. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // ========== PRELOADER ==========
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // ========== NAVBAR SCROLL ==========
+        const navbar = document.getElementById('navbar');
+        const backToTop = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ========== MOBILE MENU ==========
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Mobile dropdown toggle
+        if (window.innerWidth <= 768) {
+            const dropdownToggle = document.querySelector('.nav-links > li:nth-child(3) > a');
+            const dropdown = document.getElementById('dropdown');
+
+            dropdownToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+        }
+
+        // ========== ACTIVE NAV LINK ==========
+        const sections = document.querySelectorAll('section[id]');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ========== SCROLL REVEAL ==========
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ========== COUNTER ANIMATION ==========
+        const counters = document.querySelectorAll('.stat-item h3');
+        let countersAnimated = false;
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersAnimated) {
+                    countersAnimated = true;
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.textContent);
+                        const suffix = counter.textContent.replace(/[0-9]/g, '');
+                        let current = 0;
+                        const increment = target / 60;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = target + suffix;
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = Math.floor(current) + suffix;
+                            }
+                        }, 30);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-container');
+        if (statsSection) counterObserver.observe(statsSection);
+
+        // ========== FORM SUBMISSION ==========
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const btn = this.querySelector('.btn-primary');
+            const originalContent = btn.innerHTML;
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.style.opacity = '0.7';
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> Quote Sent Successfully!';
+                btn.style.background = 'linear-gradient(135deg, #25d366, #128C7E)';
+                btn.style.opacity = '1';
+
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    btn.style.background = '';
+                    this.reset();
+                }, 3000);
+            }, 2000);
+        });
+
+        // ========== SMOOTH SCROLL FOR ANCHOR LINKS ==========
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
